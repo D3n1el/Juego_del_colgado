@@ -13,7 +13,7 @@ public class Juego_del_colgado {
 		int tj = 0; //Total de jugadores
 		int tr = 0; //Total de rondas
 		String palabra = "";
-		String P = "";
+		String p = "";
 				
 		System.out.println("|---------------------------|");
 		System.out.println("|   El juego del ahorcado   |");
@@ -37,10 +37,27 @@ public class Juego_del_colgado {
 		
 		String x = s.nextLine(); //String que permite que en el siguiente se pueda realizar.
 		
+		System.out.println("");
 		System.out.println("Introduce la palabra a adivinar:");
-			palabra = s.nextLine();
-			palabra = palabra.toUpperCase();
-			palabra = palabra.replaceAll("[ABCDEFGHIJKLMNÑOPQRSTUVWXYZ]", "□");
+			palabra = s.nextLine(); //Guarda la palabra a adivinar
+			p = palabra.toUpperCase(); //Pasa todo el texto a mayúsculas
+			p = palabra.replaceAll("[ABCDEFGHIJKLMNÑOPQRSTUVWXYZ]", "□"); //censura todas las letras a □
+		
+		for (int i = 0; i < tr; i++) {
+			
+			for (int ii = 0; ii < tj; ii++) {
+				System.out.print("Turno para el jugador " + ii);
+				System.out.print(palabra);
+				
+				System.out.println("");
+				System.out.print("Introduce un letra: ");
+					String letra = s.nextLine();
+				
+			}
+		}
+		
+		
+		
 		
 	}
 

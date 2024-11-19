@@ -11,7 +11,8 @@ public class Juego_del_colgado {
 		
 		//Declaración de variables
 		int tj = 0; //Total de jugadores
-		int tr = 0; //Total de rondas
+		String[] vidas = {"❤️", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"};
+		String[] strArray = new String[6];
 		String palabra = "";
 		String p = "";
 				
@@ -21,43 +22,38 @@ public class Juego_del_colgado {
 		
 		while(true) { //Bucle que impide la introducción de numeros inválidos
 			System.out.println("");
-			System.out.print("Indica el numero de jugadores (Mínimo 2): ");
+			System.out.print("Indica el numero de jugadores (Mínimo 2, Máximo 10): ");
 				tj = s.nextInt();
-			if (tj >= 2) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
-			System.out.println("¡NUMERO INVÁLIDO!");
-		}
-		
-		while(true) { //Bucle que impide la introducción de numeros inválidos
-			System.out.println("");
-			System.out.print("Indica el numero de rondas: ");
-				tr = s.nextInt();
-			if (tr >= 1) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
+			if (tj >= 2 && tj <= 10) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
 			System.out.println("¡NUMERO INVÁLIDO!");
 		}
 		
 		String x = s.nextLine(); //String que permite que en el siguiente se pueda realizar.
 		
 		System.out.println("");
-		System.out.println("Introduce la palabra a adivinar:");
+		System.out.print("Introduce la palabra a adivinar: ");
 			palabra = s.nextLine(); //Guarda la palabra a adivinar
-			p = palabra.toUpperCase(); //Pasa todo el texto a mayúsculas
-			p = palabra.replaceAll("[ABCDEFGHIJKLMNÑOPQRSTUVWXYZ]", "□"); //censura todas las letras a □
+			palabra = palabra.toUpperCase(); //Pasa todo el texto a mayúsculas
+			p = palabra.replaceAll("[ABCDEFGHIJKLMNÑOPQRSTUVWXYZ]", "_ "); //censura todas las letras a □
 		
-		for (int i = 0; i < tr; i++) {
+		for (int i = vidas.length - 1; i >= 0 ; i--) { //Contador de vidas
+			System.out.println("");
+			System.out.println(vidas[i]);
 			
-			for (int ii = 0; ii < tj; ii++) {
-				System.out.print("Turno para el jugador " + ii);
-				System.out.print(palabra);
+			for (int ii = 0 + 1; ii < tj; ii++) {
+				System.out.println("Turno para el jugador " + ii);
+				System.out.println(p);
 				
 				System.out.println("");
-				System.out.print("Introduce un letra: ");
+				System.out.print("Introduce una letra: ");
 					String letra = s.nextLine();
+					letra = letra.toUpperCase();
+					
+				
 				
 			}
+			
 		}
-		
-		
-		
 		
 	}
 

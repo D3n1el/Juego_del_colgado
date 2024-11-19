@@ -12,7 +12,6 @@ public class Juego_del_colgado {
 		//Declaración de variables
 		int tj = 0; //Total de jugadores
 		String[] vidas = {"❤️", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"};
-		String[] strArray = new String[6];
 		String palabra = "";
 		String p = "";
 				

@@ -12,7 +12,6 @@ public class Juego_del_colgado {
 		//Declaración de variables
 		int tj = 0; //Total de jugadores
 		String[] vidas = {"❤️", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"};
-		String p = "";
 				
 		System.out.println("|---------------------------|");
 		System.out.println("|   El juego del ahorcado   |");
@@ -34,13 +33,14 @@ public class Juego_del_colgado {
 			palabra = palabra.toUpperCase();
 			
 		char[] palabraArray = new char[palabra.length()];
+		char[] newArray = new char[palabra.length()];
 		
 		for (int i = 0; i < palabra.length(); i++) {
 			palabraArray[i] = palabra.charAt(i);
 		}
 		
-		for (int i = 0; i < palabraArray.length; i++) {
-			System.out.print(palabraArray[i]);
+		for (int i = 0; i < palabra.length(); i++) {
+			newArray[i] = '_';
 		}
 		
 		for (int i = vidas.length - 1; i >= 0 ; i--) { //Contador de vidas
@@ -49,15 +49,27 @@ public class Juego_del_colgado {
 			
 			for (int ii = 1; ii <= tj; ii++) {
 				System.out.println("Turno para el jugador " + ii);
-				System.out.println(p);
 				
+				for (int j = 0; j < palabraArray.length; j++) {
+					System.out.print(newArray[j]);
+				}
+				
+				System.out.println("");
 				System.out.println("");
 				System.out.print("Introduce una letra: ");
 					String letra = s.nextLine();
 					letra = letra.toUpperCase();
 					
+				for (int j = 0; j < palabra.length(); j++) {
+					if (palabraArray[j] != letra.charAt(0)) {
+						newArray[j] = '_';
+					}
+					else if (palabraArray[j] == letra.charAt(0)) {
+						newArray[j] = letra.charAt(0);
+						 
+					}
 					
-				
+				}
 				
 			}
 			

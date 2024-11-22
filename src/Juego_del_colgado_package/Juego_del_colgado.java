@@ -1,5 +1,6 @@
 package Juego_del_colgado_package;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Juego_del_colgado {
@@ -34,14 +35,14 @@ public class Juego_del_colgado {
 			
 		char[] palabraArray = new char[palabra.length()];
 		char[] newArray = new char[palabra.length()];
+		String[] strArray = new String[palabra.length()];
 		
 		for (int i = 0; i < palabra.length(); i++) {
 			palabraArray[i] = palabra.charAt(i);
 		}
 		
-		for (int i = 0; i < palabra.length(); i++) {
-			newArray[i] = '_';
-		}
+			Arrays.fill(palabraArray, '_');
+		
 		
 		for (int i = vidas.length - 1; i >= 0 ; i--) { //Contador de vidas
 			System.out.println("");
@@ -51,7 +52,7 @@ public class Juego_del_colgado {
 				System.out.println("Turno para el jugador " + (ii + 1));
 				
 				for (int j = 0; j < palabraArray.length; j++) {
-					System.out.print(newArray[j]);
+					System.out.print(palabraArray[j]);
 				}
 				
 				System.out.println("");
@@ -59,20 +60,12 @@ public class Juego_del_colgado {
 				System.out.print("Introduce una letra: ");
 					String letra = s.nextLine();
 					
-					char[] strArray = new char[ii];
-					strArray[ii] = letra.charAt(0);
 					
-				for (int j = 0; j < palabra.length(); j++) { //Cuenta cada letra del texto original
-					for (int k = 0; k <= strArray.length; k++) { //Cuenta cada letra del array "strArray", donde se guardan todas las letras introducidas
-						if (palabraArray[j] == strArray[k]) { //Si la letra introducida en strArray coincide con la letra en palabraArray, la mantiene
-							newArray[j] = strArray[k];
-						}
-						else if (palabraArray[j] != strArray[k]) { //En caso contrario, si es diferente, se reemplaza por _
-							newArray[j] = '_';
-						}
-						
+					
+				for (int j = 0; j < palabra.length(); j++) { //Cuenta cada letra del texto original	
+					if (letra.charAt(0) == palabraArray[j]) {
+						palabraArray[j] = letra.charAt(0);
 					}
-					
 				}
 						
 			}

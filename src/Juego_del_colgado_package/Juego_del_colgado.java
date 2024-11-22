@@ -35,13 +35,13 @@ public class Juego_del_colgado {
 			
 		char[] palabraArray = new char[palabra.length()];
 		char[] newArray = new char[palabra.length()];
-		String[] strArray = new String[palabra.length()];
 		
 		for (int i = 0; i < palabra.length(); i++) {
 			palabraArray[i] = palabra.charAt(i);
+			newArray[i] = palabra.charAt(i);
 		}
 		
-			Arrays.fill(palabraArray, '_');
+		Arrays.fill(newArray, '_');
 		
 		
 		for (int i = vidas.length - 1; i >= 0 ; i--) { //Contador de vidas
@@ -51,8 +51,8 @@ public class Juego_del_colgado {
 			for (int ii = 0; ii <= tj; ii++) {
 				System.out.println("Turno para el jugador " + (ii + 1));
 				
-				for (int j = 0; j < palabraArray.length; j++) {
-					System.out.print(palabraArray[j]);
+				for (int j = 0; j < newArray.length; j++) {
+					System.out.print(newArray[j]);
 				}
 				
 				System.out.println("");
@@ -60,11 +60,14 @@ public class Juego_del_colgado {
 				System.out.print("Introduce una letra: ");
 					String letra = s.nextLine();
 					
-					
-					
-				for (int j = 0; j < palabra.length(); j++) { //Cuenta cada letra del texto original	
-					if (letra.charAt(0) == palabraArray[j]) {
-						palabraArray[j] = letra.charAt(0);
+				char[] letraArray = new char[ii + 1];
+				letraArray[ii] = letra.toUpperCase().charAt(0);
+				
+				for (int j = 0; j < palabraArray.length; j++) { //Cuenta cada letra del texto original
+					for (int k = 0; k < letraArray.length; k++) {
+						if (letraArray[k] == palabraArray[j]) {
+							newArray[j] = letraArray[k];
+						}
 					}
 				}
 						

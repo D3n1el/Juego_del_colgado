@@ -14,12 +14,13 @@ public class Juego_del_colgado {
 		int tj = 0; //Total de jugadores
 		int tr = 0; //Total de rondas
 		int cv = 5; //Total de vidas
-		String[] vidas = {"❤", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"};
-		boolean acierto = false;
-		boolean aciertoLetra = false;
+		boolean acierto = false; //Variable que detemrina si ha acertado la palabra entera
+		boolean aciertoLetra = false; //Variable que detecta si ha acertado la letra correcta.
+		boolean noEmpate = false; //Variable que asegura que no ha habido empate al finalizar la partida.
+		String[] vidas = {"❤", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"}; //Las vidas
 		
 		System.out.println("|---------------------------|");
-		System.out.println("|   El juego del ahorcado   |");
+		System.out.println("|   EL JUEGO DEL AHORCADO   |");
 		System.out.println("|---------------------------|");
 		
 		while(true) { //Bucle que impide la introducción de numeros inválidos
@@ -32,9 +33,9 @@ public class Juego_del_colgado {
 		
 		while(true) { //Bucle que impide la introducción de numeros inválidos
 			System.out.println("");
-			System.out.print("Indica el numero de rondas (Mínimo 6): ");
-			tr = s.nextInt();
-		if (tr >= 6) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
+			System.out.print("Indica el numero de rondas (Mínimo 1): ");
+				tr = s.nextInt();
+			if (tr >= 1) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
 			System.out.println("¡NUMERO INVÁLIDO!");
 		}
 		
@@ -48,6 +49,7 @@ public class Juego_del_colgado {
 		//La largada del array es la misma que la largada del texto original tipo String.
 		char[] palabraArray = new char[palabra.length()]; //Declaración del array que contiene la palabra original dividida en letras.
 		char[] newArray = new char[palabra.length()]; //Declaración del array que contiene la palabra censurada dividida en letras.
+		int[] puntos = new int[tj]; //Array que cuenta los puntos de cada posición por jugador.
 		
 		for (int i = 0; i < palabra.length(); i++) { 
 			palabraArray[i] = palabra.charAt(i); //Pasa cada carácter de la palabra original en el array que mantendrá las letras
@@ -60,75 +62,102 @@ public class Juego_del_colgado {
 			System.out.println("");
 			System.out.println("RONDA " + i); //Muestra la rondas
 			
-			for (int ii = 1; ii <= tj; ii++) { //Contador de jugadores
+			for (int ii = 0; ii < tj; ii++) { //Contador de jugadores
 				System.out.println("");
-				System.out.println("Turno para el jugador " + ii); //Muestra el jugador
+				System.out.print("Turno para el jugador " + (ii + 1) + "  ~"); //Muestra el jugador
 				
-				aciertoLetra = false;
+				aciertoLetra = false; //Cada vez que un jugador empieza un turno, el estado de aciertoLetra cambia a false.
 				
-					System.out.println(vidas[cv]); //Muestra las vidas
+					cv = 5; //Cada vez que un jugador empieza su turno, el contador de vidas se reinicia. 
 				
-					for (int j = 0; j < newArray.length; j++) { //Muestra la palabra censurada
-						System.out.print(newArray[j]);
-					}
-		
-					System.out.println("");
-					System.out.println("");
-					System.out.print("Introduce una letra: ");
-						String letra = s.nextLine();
+					while (cv >= 0) {
+
+						System.out.println("  " + vidas[cv]);
+				
+						for (int j = 0; j < newArray.length; j++) { //Muestra la palabra censurada
+							System.out.print(newArray[j]);
+						}
+			
+						System.out.println("");
+						System.out.println("");
+						System.out.print("Introduce una letra: ");
+							String letra = s.nextLine();
+							
+						char[] letraArray = new char[ii + 1]; //Usa la posición de ii. Si no se suma 1 a su posición, el programa da error y no deja continuar
+						letraArray[ii] = letra.toUpperCase().charAt(0);
 						
-					char[] letraArray = new char[ii + 1]; //Usa la posición de ii. Si no se suma 1 a su posición, el programa da error y no deja continuar
-					letraArray[ii] = letra.toUpperCase().charAt(0);
-					
-					for (int j = 0; j < palabraArray.length; j++) { //Cuenta cada posición del array sin _
-						for (int k = 0; k < letraArray.length; k++) { //Cuenta la posición de las letras introducidas para intentar adivinar la palabra.
-							if (letraArray[k] == palabraArray[j]) { //Compara cada letra de letraArray buscando si es igual que la introducida en palabraArray
-								newArray[j] = letraArray[k]; //En caso de que lo sea, sustituye el _ en esa posición dentro de newArray donde se encuetra la palabra coicidente.
-								aciertoLetra = true;
+						for (int j = 0; j < palabraArray.length; j++) { //Cuenta cada posición del array sin _
+							for (int k = 0; k < letraArray.length; k++) { //Cuenta la posición de las letras introducidas para intentar adivinar la palabra.
+								if (letraArray[k] == palabraArray[j]) { //Compara cada letra de letraArray buscando si es igual que la introducida en palabraArray
+									newArray[j] = letraArray[k]; //En caso de que lo sea, sustituye el _ en esa posición dentro de newArray donde se encuetra la palabra coicidente.
+									aciertoLetra = true;
+								}
 							}
 						}
-					}
-					
-					if (aciertoLetra) { //Si ha acertado la letra, manda un mensaje de enhorabuena.
-						System.out.println("¡Acertaste!");
+						
+						if (aciertoLetra) { //Si ha acertado la letra, manda un mensaje de enhorabuena.
+							System.out.println("¡Acertaste!");
 
-					} else if (!aciertoLetra) {
-						System.out.println("Fallaste..."); //Si ha fallado la letra, reduce el contador cv, que es el de la vida.
-						cv--;
-					}
-					
-					for (int j = 0; j < newArray.length; j++) { //La finalidad de este bucle es revisar que todos los carácteres de newArray sean letras, y no _
-						if (newArray[j] == '_') { //En cambio, si detecta alguna posición donde sí contenga _, el estado de "acierto" permanece en false. 
-							acierto = false;
-							break;
+
+						} else if (!aciertoLetra) {
+							System.out.print("Fallaste...  ~"); //Si ha fallado la letra, reduce el contador cv, que es el de la vida.
+							cv--;
 						}
-						if (newArray[j] != '_'); { //Si la posición de newArray no es un _, cambia el estado de "acierto" a true
-							acierto = true;
+						
+						for (int j = 0; j < newArray.length; j++) { //La finalidad de este bucle es revisar que todos los carácteres de newArray sean letras, y no _
+							if (newArray[j] == '_') { //En cambio, si detecta alguna posición donde sí contenga _, el estado de "acierto" permanece en false. 
+								acierto = false;
+								break;
+							}
+							if (newArray[j] != '_'); { //Si la posición de newArray no es un _, cambia el estado de "acierto" a true
+								acierto = true;
+							}
 						}
+						
+						if (aciertoLetra) {System.out.println("Punto para el jugador " + ii); puntos[ii]++; break;} //Con este break, el jugador que acaba de acertar finaliza su turno en la ronda. De esta forma, puede jugar ya el siguiente. Aparte, también suma 1 al contador de puntos del jugador y lo muestra.
 					}
 				
 					if (acierto) { //En caso de haber acertado todas las letras, muestra la palabra completa y muestra un mensaje de enhorabuena.
 						for (int j = 0; j < newArray.length; j++) {
-							System.out.print(newArray[j]);
+							System.out.print(newArray[j]); //Muestra la palabra, ya adivinada
 						}
 						System.out.println("");
 						System.out.println("");
-						System.out.println("★★★★★★★★★★");
-						System.out.println(" ¡VICTORIA! ");
-						System.out.println("★★★★★★★★★★");
+						System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+						System.out.println(" ¡FELICIDADES, HABÉIS ADIVINADO LA PALABRA! ");
+						System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
 						break;
 					}
+			
 			}
 			
-			if (acierto) { //Si se gana, se cierra el juego.
-				break;
+			System.out.println(""); //Muestra los puntos por cada jugador
+			System.out.println("PUNTOS TOTALES");
+			for (int ii = 0; ii < tj; ii++) { //Muestra los puntos de cada jugador
+				System.out.println("Jugador " + (ii + 1)+ ": " + puntos[ii]);
 			}
-			if (i == 0 && !acierto) { //Si no se han descubierto todas las palabras a tiempo, el juego finaliza y muestra un mensaje de derrota.
-				System.out.println("");
-				System.out.println("xxxxxxxxxxxx");
-				System.out.println(" DERROTA... ");
-				System.out.println("xxxxxxxxxxxx");
-			} //Cierre de la condición de derrota
+			
+			if (acierto) {break;}
+			
+		}
+		
+			
+		if (!noEmpate) { //Si ha habido empate, muestra mensaje diciendo que han quedado empatados.
+			System.out.println("");
+			System.out.println("------------------------------");
+			System.out.println("  Habéis quedado empatados");
+			System.out.println("------------------------------");
+		}
+		
+		if (!acierto) { //El mensaje que muestra en caso de derrota
+			System.out.println("");
+			System.out.println("   _______ ");
+			System.out.println("   |/    O ");
+			System.out.println("   |  ---|---");
+			System.out.println("   |     |  ");
+			System.out.println("   |    / \\");
+			System.out.println("   |   /   \\ ");
+			System.out.println("  ---");
 		}
 	}
 }

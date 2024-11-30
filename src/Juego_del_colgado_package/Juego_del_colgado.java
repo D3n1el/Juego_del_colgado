@@ -20,9 +20,16 @@ public class Juego_del_colgado {
 		boolean noEmpate = false; //Variable que asegura que no ha habido empate al finalizar la partida.
 		String[] vidas = {"❤", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"}; //Las vidas
 		
-		System.out.println("|---------------------------|");
-		System.out.println("|   EL JUEGO DEL AHORCADO   |");
-		System.out.println("|---------------------------|");
+		System.out.println("|-----------------------------|");
+		System.out.println("|                             |");
+		System.out.println("|    EL JUEGO DEL AHORCADO    |");
+		System.out.println("|                             |");
+		System.out.println("|-----------------------------|");
+		System.out.println("");
+		
+		System.out.print("Introduce la palabra a adivinar: ");
+			String palabra = s.nextLine();
+			palabra = palabra.toUpperCase(); //Convierte la palabra a mayúsculas
 		
 		while(true) { //Bucle que impide la introducción de numeros inválidos
 			System.out.println("");
@@ -41,11 +48,6 @@ public class Juego_del_colgado {
 		}
 		
 		String x = s.nextLine(); //String que permite que en el siguiente se pueda realizar.
-		
-		System.out.println("");
-		System.out.print("Introduce la palabra a adivinar: ");
-			String palabra = s.nextLine();
-			palabra = palabra.toUpperCase(); //Convierte la palabra a mayúsculas
 			
 		//La largada del array es la misma que la largada del texto original tipo String.
 		char[] palabraArray = new char[palabra.length()]; //Declaración del array que contiene la palabra original dividida en letras.
@@ -154,6 +156,7 @@ public class Juego_del_colgado {
 					System.out.println("  El jugador "+ (j + 1) +" ha conseguido más puntos");
 					System.out.println("-----------------------------------------");
 					noEmpate = true;
+					break;
 				}		
 			}
 		}

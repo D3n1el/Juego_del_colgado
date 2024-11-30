@@ -15,7 +15,8 @@ public class Juego_del_colgado {
 		int tr = 0; //Total de rondas
 		int cv = 5; //Total de vidas
 		boolean acierto = false; //Variable que detemrina si ha acertado la palabra entera
-		boolean aciertoLetra = false; //Variable que detecta si ha acertado la letra correcta.
+		boolean aciertoLetra = false; //Variable que detecta si ha acertado la letra correcta. 
+		boolean ganador = false; //Variable que detecta quien ha ganado.
 		boolean noEmpate = false; //Variable que asegura que no ha habido empate al finalizar la partida.
 		String[] vidas = {"❤", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"}; //Las vidas
 		
@@ -71,7 +72,7 @@ public class Juego_del_colgado {
 					cv = 5; //Cada vez que un jugador empieza su turno, el contador de vidas se reinicia. 
 				
 					while (cv >= 0) {
-
+						
 						System.out.println("  " + vidas[cv]);
 				
 						for (int j = 0; j < newArray.length; j++) { //Muestra la palabra censurada
@@ -98,7 +99,6 @@ public class Juego_del_colgado {
 						if (aciertoLetra) { //Si ha acertado la letra, manda un mensaje de enhorabuena.
 							System.out.println("¡Acertaste!");
 
-
 						} else if (!aciertoLetra) {
 							System.out.print("Fallaste...  ~"); //Si ha fallado la letra, reduce el contador cv, que es el de la vida.
 							cv--;
@@ -114,7 +114,7 @@ public class Juego_del_colgado {
 							}
 						}
 						
-						if (aciertoLetra) {System.out.println("Punto para el jugador " + ii); puntos[ii]++; break;} //Con este break, el jugador que acaba de acertar finaliza su turno en la ronda. De esta forma, puede jugar ya el siguiente. Aparte, también suma 1 al contador de puntos del jugador y lo muestra.
+						if (aciertoLetra) {System.out.println("Punto para el jugador " + (ii + 1)); puntos[ii]++; break;} //Con este break, el jugador que acaba de acertar finaliza su turno en la ronda. De esta forma, puede jugar ya el siguiente. Aparte, también suma 1 al contador de puntos del jugador y lo muestra.
 					}
 				
 					if (acierto) { //En caso de haber acertado todas las letras, muestra la palabra completa y muestra un mensaje de enhorabuena.
@@ -141,6 +141,22 @@ public class Juego_del_colgado {
 			
 		}
 		
+		for (int j = 0; j < tj; j++) { //Por compara una puntuación de todos los jugadores, individualmente, con las del resto.
+			for (int jj = 0; jj < tj; jj++) {
+				if (puntos[j] > puntos[jj]) { //Realiza las comparaciones.
+					ganador = true; //El jugador con más puntos es que mantenga el estado de la variable "ganador" hasta el final.
+				} else { //De esta forma, si un jugador ha hecho más puntos que otro, pero menos que otro que acaba de comparar, entonces el estado de la variable ganador cambia a falso.
+					ganador = false; 
+				}
+				if (ganador) { //Informa quién ha ganado más puntos
+					System.out.println("");
+					System.out.println("-----------------------------------------");
+					System.out.println("  El jugador "+ (j + 1) +" ha conseguido más puntos");
+					System.out.println("-----------------------------------------");
+					noEmpate = true;
+				}		
+			}
+		}
 			
 		if (!noEmpate) { //Si ha habido empate, muestra mensaje diciendo que han quedado empatados.
 			System.out.println("");

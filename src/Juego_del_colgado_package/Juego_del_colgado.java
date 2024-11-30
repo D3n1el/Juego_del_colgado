@@ -14,7 +14,7 @@ public class Juego_del_colgado {
 		int tj = 0; //Total de jugadores
 		int tr = 0; //Total de rondas
 		int cv = 5; //Total de vidas
-		String[] vidas = {"❤️", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"};
+		String[] vidas = {"❤", "❤️❤️", "❤️❤️❤️", "❤️❤️❤️❤️", "❤️❤️❤️❤️❤️", "❤️❤️❤️❤️❤️❤️"};
 		boolean acierto = false;
 		boolean aciertoLetra = false;
 		
@@ -43,31 +43,32 @@ public class Juego_del_colgado {
 		System.out.println("");
 		System.out.print("Introduce la palabra a adivinar: ");
 			String palabra = s.nextLine();
-			palabra = palabra.toUpperCase();
+			palabra = palabra.toUpperCase(); //Convierte la palabra a mayúsculas
 			
-		char[] palabraArray = new char[palabra.length()];
-		char[] newArray = new char[palabra.length()];
+		//La largada del array es la misma que la largada del texto original tipo String.
+		char[] palabraArray = new char[palabra.length()]; //Declaración del array que contiene la palabra original dividida en letras.
+		char[] newArray = new char[palabra.length()]; //Declaración del array que contiene la palabra censurada dividida en letras.
 		
-		for (int i = 0; i < palabra.length(); i++) {
-			palabraArray[i] = palabra.charAt(i);
-			newArray[i] = palabra.charAt(i);
+		for (int i = 0; i < palabra.length(); i++) { 
+			palabraArray[i] = palabra.charAt(i); //Pasa cada carácter de la palabra original en el array que mantendrá las letras
+			newArray[i] = palabra.charAt(i); //Pasa cada carácter de la palabra original en el array que sustituirá las letras por _
 		}
 		
 		Arrays.fill(newArray, '_'); //Sustituye las letras de cada posición por _
 		
-		for (int i = 1; i <= tr; i++) {
+		for (int i = 1; i <= tr; i++) { //Contador de rondas
 			System.out.println("");
-			System.out.println("RONDA " + i);
+			System.out.println("RONDA " + i); //Muestra la rondas
 			
-			for (int ii = 1; ii <= tj; ii++) {
+			for (int ii = 1; ii <= tj; ii++) { //Contador de jugadores
 				System.out.println("");
-				System.out.println("Turno para el jugador " + ii);
+				System.out.println("Turno para el jugador " + ii); //Muestra el jugador
 				
 				aciertoLetra = false;
 				
-					System.out.println(vidas[cv]);
+					System.out.println(vidas[cv]); //Muestra las vidas
 				
-					for (int j = 0; j < newArray.length; j++) {
+					for (int j = 0; j < newArray.length; j++) { //Muestra la palabra censurada
 						System.out.print(newArray[j]);
 					}
 		
@@ -90,10 +91,9 @@ public class Juego_del_colgado {
 					
 					if (aciertoLetra) { //Si ha acertado la letra, manda un mensaje de enhorabuena.
 						System.out.println("¡Acertaste!");
-						i++;
-						
+
 					} else if (!aciertoLetra) {
-						System.out.println("Fallaste..."); //Si ha fallado la letra, reduce el contador iii, que es el de la vida.
+						System.out.println("Fallaste..."); //Si ha fallado la letra, reduce el contador cv, que es el de la vida.
 						cv--;
 					}
 					
@@ -112,13 +112,14 @@ public class Juego_del_colgado {
 							System.out.print(newArray[j]);
 						}
 						System.out.println("");
-						System.out.println("★★★★★★★★★★★");
+						System.out.println("");
+						System.out.println("★★★★★★★★★★");
 						System.out.println(" ¡VICTORIA! ");
-						System.out.println("★★★★★★★★★★★");
+						System.out.println("★★★★★★★★★★");
 						break;
 					}
 			}
-				
+			
 			if (acierto) { //Si se gana, se cierra el juego.
 				break;
 			}

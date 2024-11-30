@@ -133,13 +133,21 @@ public class Juego_del_colgado {
 			
 			}
 			
+			if (!acierto && i == tr) { //Condición que se activa si no se ha resuelto la palabra al finalizar el juego y, por lo tanto, el juego.
+				if (!aciertoLetra) {System.out.println("");} //Salto de línea que se realiza si nadie he acertado la palabra en el turno antes de finalizar el juego. Esto se hace para "compensar" el salto de página en el println a la hora de acertar la letra (Es decir, para que haga iguamente el salto de página, aunque no se haya acertado la letra en ese momento).
+				for (int j = 0; j < newArray.length; j++) {
+					System.out.print(newArray[j]); //Muestra la palabra oculta, pero con las letras ya adivinadas (Si se han adivinado).
+				}
+				System.out.println("");
+			}
+			
 			System.out.println(""); //Muestra los puntos por cada jugador
 			System.out.println("PUNTOS TOTALES");
 			for (int ii = 0; ii < tj; ii++) { //Muestra los puntos de cada jugador
 				System.out.println("Jugador " + (ii + 1)+ ": " + puntos[ii]);
 			}
 			
-			if (acierto) {break;} //Al igual qque finaliza el turno de los jugadores, también se finalizan las rondas. Por lo tanto, finaliza el juego.
+			if (acierto) {break;} //Al igual que finaliza el turno de los jugadores, también se finalizan las rondas. Por lo tanto, finaliza el juego.
 			
 		}
 		

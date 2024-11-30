@@ -8,7 +8,7 @@ public class Juego_del_colgado {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Scanner s = new Scanner (System.in);
+		Scanner s = new Scanner (System.in); //Inicialización del Scanner
 		
 		//Declaración de variables
 		int tj = 0; //Total de jugadores
@@ -33,11 +33,11 @@ public class Juego_del_colgado {
 		
 		while(true) { //Bucle que impide la introducción de numeros inválidos
 			System.out.println("");
-			System.out.print("Indica el numero de jugadores (Mínimo 2, Máximo 10): ");
+			System.out.print("Indica el numero de jugadores (Mínimo 2, Máximo 10): "); //Introduce la cantidad de jugadores.
 				tj = s.nextInt();
 			if (tj >= 2 && tj <= 10) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
 			System.out.println("¡NUMERO INVÁLIDO!");
-		}
+		} //Cierre del bucle para impedir numeros erróneos
 		
 		while(true) { //Bucle que impide la introducción de numeros inválidos
 			System.out.println("");
@@ -45,7 +45,7 @@ public class Juego_del_colgado {
 				tr = s.nextInt();
 			if (tr >= 1) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
 			System.out.println("¡NUMERO INVÁLIDO!");
-		}
+		} //Cierre del bucle para impedir numeros erróneos
 		
 		String x = s.nextLine(); //String que permite que en el siguiente se pueda realizar.
 			
@@ -73,11 +73,11 @@ public class Juego_del_colgado {
 				
 					cv = 5; //Cada vez que un jugador empieza su turno, el contador de vidas se reinicia. 
 				
-					while (cv >= 0) {
+					while (cv >= 0) { //Mientras al jugador le queden vidas, sigue siendo su turno. Una vez se quede sin vidas, el bucle finaliza.
 						
-						System.out.println("  " + vidas[cv]);
+						System.out.println("  " + vidas[cv]); //Muestra las vidas que le quedan al jugador que tenga el turno
 				
-						for (int j = 0; j < newArray.length; j++) { //Muestra la palabra censurada
+						for (int j = 0; j < newArray.length; j++) { //Muestra la palabra oculta
 							System.out.print(newArray[j]);
 						}
 			
@@ -93,7 +93,7 @@ public class Juego_del_colgado {
 							for (int k = 0; k < letraArray.length; k++) { //Cuenta la posición de las letras introducidas para intentar adivinar la palabra.
 								if (letraArray[k] == palabraArray[j]) { //Compara cada letra de letraArray buscando si es igual que la introducida en palabraArray
 									newArray[j] = letraArray[k]; //En caso de que lo sea, sustituye el _ en esa posición dentro de newArray donde se encuetra la palabra coicidente.
-									aciertoLetra = true;
+									aciertoLetra = true; //Cambia el estado de aciertoLetra a verdadero.
 								}
 							}
 						}
@@ -101,15 +101,15 @@ public class Juego_del_colgado {
 						if (aciertoLetra) { //Si ha acertado la letra, manda un mensaje de enhorabuena.
 							System.out.println("¡Acertaste!");
 
-						} else if (!aciertoLetra) {
-							System.out.print("Fallaste...  ~"); //Si ha fallado la letra, reduce el contador cv, que es el de la vida.
-							cv--;
+						} else if (!aciertoLetra) { //Si ha fallado la letra, reduce el contador cv, que es el de la vida.
+							System.out.print("Fallaste...  ~"); 
+							cv--; //Reduce las vidas en 1.
 						}
 						
 						for (int j = 0; j < newArray.length; j++) { //La finalidad de este bucle es revisar que todos los carácteres de newArray sean letras, y no _
 							if (newArray[j] == '_') { //En cambio, si detecta alguna posición donde sí contenga _, el estado de "acierto" permanece en false. 
 								acierto = false;
-								break;
+								break; //Se pone este "break" para evitar que cambie el estado de "acierto" por error. Es decir, evitar que se active si se ha adivinado una sola letra. De esta forma, solamente llegará a comprobar la siguiente condición si se ha adivinado toda la palabra. 
 							}
 							if (newArray[j] != '_'); { //Si la posición de newArray no es un _, cambia el estado de "acierto" a true
 								acierto = true;
@@ -128,7 +128,7 @@ public class Juego_del_colgado {
 						System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
 						System.out.println(" ¡FELICIDADES, HABÉIS ADIVINADO LA PALABRA! ");
 						System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-						break;
+						break; //una vez descubierta la palabra se finaliza automáticamente el turno de los jugadores.
 					}
 			
 			}
@@ -139,29 +139,29 @@ public class Juego_del_colgado {
 				System.out.println("Jugador " + (ii + 1)+ ": " + puntos[ii]);
 			}
 			
-			if (acierto) {break;}
+			if (acierto) {break;} //Al igual qque finaliza el turno de los jugadores, también se finalizan las rondas. Por lo tanto, finaliza el juego.
 			
 		}
 		
 		for (int j = 0; j < tj; j++) { //Por compara una puntuación de todos los jugadores, individualmente, con las del resto.
-			for (int jj = 0; jj < tj; jj++) {
+			for (int jj = 0; jj < tj; jj++) { //Por ejemplo, si hay 3 jugadores, el programa coge la puntuación del jugador 1, y compara dicha puntuación con las puntuaciones del resto de jugadores (En cada bucle del indice "j", es un jugador diferente a comparar con otro del índice "jj").
 				if (puntos[j] > puntos[jj]) { //Realiza las comparaciones.
 					ganador = true; //El jugador con más puntos es que mantenga el estado de la variable "ganador" hasta el final.
 				} else { //De esta forma, si un jugador ha hecho más puntos que otro, pero menos que otro que acaba de comparar, entonces el estado de la variable ganador cambia a falso.
-					ganador = false; 
+					ganador = false;
 				}
 				if (ganador) { //Informa quién ha ganado más puntos
 					System.out.println("");
 					System.out.println("-----------------------------------------");
 					System.out.println("  El jugador "+ (j + 1) +" ha conseguido más puntos");
 					System.out.println("-----------------------------------------");
-					noEmpate = true;
-					break;
+					noEmpate = true; //Asegura que no hubo empate
+					break; //Impide que se muestre el mensaje 2 veces.
 				}		
 			}
 		}
 			
-		if (!noEmpate) { //Si ha habido empate, muestra mensaje diciendo que han quedado empatados.
+		if (!noEmpate) { //Si hubo empate, muestra mensaje diciendo que han quedado empatados.
 			System.out.println("");
 			System.out.println("------------------------------");
 			System.out.println("  Habéis quedado empatados");

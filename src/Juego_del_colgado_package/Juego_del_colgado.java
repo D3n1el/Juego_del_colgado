@@ -33,8 +33,8 @@ public class Juego_del_colgado {
 		while(true) { //Bucle que impide la introducción de numeros inválidos
 			System.out.println("");
 			System.out.print("Indica el numero de rondas (Mínimo 6): ");
-				tj = s.nextInt();
-			if (tj >= 6) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
+			tr = s.nextInt();
+		if (tr >= 6) {break;} //Al poner un número válido, sale del bucle para seguir la instrucción después de dicho bucle.
 			System.out.println("¡NUMERO INVÁLIDO!");
 		}
 		
@@ -55,13 +55,13 @@ public class Juego_del_colgado {
 		
 		Arrays.fill(newArray, '_'); //Sustituye las letras de cada posición por _
 		
-		for (int i = 0; i <= tr; i++) {
+		for (int i = 1; i <= tr; i++) {
 			System.out.println("");
 			System.out.println("RONDA " + i);
 			
-			for (int ii = 0; ii < tj; ii++) {
+			for (int ii = 1; ii <= tj; ii++) {
 				System.out.println("");
-				System.out.println("Turno para el jugador " + (ii + 1));
+				System.out.println("Turno para el jugador " + ii);
 				
 				aciertoLetra = false;
 				
@@ -91,6 +91,7 @@ public class Juego_del_colgado {
 					if (aciertoLetra) { //Si ha acertado la letra, manda un mensaje de enhorabuena.
 						System.out.println("¡Acertaste!");
 						i++;
+						
 					} else if (!aciertoLetra) {
 						System.out.println("Fallaste..."); //Si ha fallado la letra, reduce el contador iii, que es el de la vida.
 						cv--;
